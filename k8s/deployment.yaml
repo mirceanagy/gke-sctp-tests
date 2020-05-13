@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sctpserver
+  name: sctp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sctpserver
+  template:
+    metadata:
+      labels:
+        app: sctpserver
+    spec:
+      containers:
+      - name: sctp-server
+        image: gcr.io/vp-tpm-playground/socat-ct
+        args:
+        - socat 
+        - "-U"
+        - "-"
+        - "sctp-listen:11111,fork,reuseaddr"
+        ports:
+        - containerPort: 11111
+          protocol: SCTP
+        livenessProbe:
+          exec:
+            command:
+            - echo
+            - hi
+          initialDelaySeconds: 5
+          periodSeconds: 10

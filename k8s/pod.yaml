@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: sctpserver
+  name: sctp-server
+spec:
+  containers:
+  - name: sctp-server-pod1
+    image: gcr.io/vp-tpm-playground/socat-ct
+    args:
+       - socat 
+       - "-U"
+       - "-"
+       - "sctp-listen:11111,fork,reuseaddr"
+    ports:
+    - containerPort: 11111
+      protocol: SCTP
+    livenessProbe:
+      exec:
+        command:
+        - echo
+        - hi
+      initialDelaySeconds: 5
+      periodSeconds: 10
