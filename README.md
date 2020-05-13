@@ -2,7 +2,7 @@
 Tests over various GKE setups with the SCTP protocol
 
 ## Test1: Headless service over the deployment
-- Based on the k8s configurations in this repository and a Docker image created from this ([Dockerfile]https://github.com/hshinde/socatdocker/blob/master/Dockerfile)
+- Based on the k8s configurations in this repository and a Docker image created from this [Dockerfile](https://github.com/hshinde/socatdocker/blob/master/Dockerfile)
 
 ```gcloud container clusters create alpha-headless --enable-kubernetes-alpha --zone  us-central1-c --no-enable-autoupgrade --enable-network-policy --image-type=ubuntu
 kubectl apply -f deployment.yaml
